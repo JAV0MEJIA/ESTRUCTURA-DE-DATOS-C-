@@ -1,0 +1,71 @@
+using System;
+
+// Clase para el Círculo
+public class Circulo
+{
+    // Atributos privados (encapsulados)
+    private double radio;
+
+    // Constructor
+    public Circulo(double radio)
+    {
+        this.radio = radio; // Asignación del radio
+    }
+
+    // Método para calcular el área
+    public double CalcularArea()
+    {
+        return Math.PI * Math.Pow(radio, 2); // Área = π * r²
+    }
+
+    // Método para calcular el perímetro (circunferencia)
+    public double CalcularPerimetro()
+    {
+        return 2 * Math.PI * radio; // Perímetro = 2πr
+    }
+}
+
+// Clase para el Rectángulo
+public class Rectangulo
+{
+    // Atributos privados
+    private double baseRectangulo;
+    private double altura;
+
+    // Constructor
+    public Rectangulo(double baseRectangulo, double altura)
+    {
+        this.baseRectangulo = baseRectangulo;
+        this.altura = altura;
+    }
+
+    // Método para calcular el área
+    public double CalcularArea()
+    {
+        return baseRectangulo * altura; // Área = base * altura
+    }
+
+    // Método para calcular el perímetro
+    public double CalcularPerimetro()
+    {
+        return 2 * (baseRectangulo + altura); // Perímetro = 2(b + h)
+    }
+}
+
+// Programa principal
+public class Program
+{
+    public static void Main()
+    {
+        // Ejemplo de uso
+        Circulo miCirculo = new Circulo(5.0);
+        Console.WriteLine("Círculo:");
+        Console.WriteLine($"Área: {miCirculo.CalcularArea():F2}");
+        Console.WriteLine($"Perímetro: {miCirculo.CalcularPerimetro():F2}");
+
+        Rectangulo miRectangulo = new Rectangulo(4.0, 6.0);
+        Console.WriteLine("\nRectángulo:");
+        Console.WriteLine($"Área: {miRectangulo.CalcularArea():F2}");
+        Console.WriteLine($"Perímetro: {miRectangulo.CalcularPerimetro():F2}");
+    }
+}
