@@ -1,0 +1,223 @@
+
+using System;
+using System.Collections.Generic;
+
+namespace ClinicaAsociacion
+{
+    class Program
+    {
+        static void Main(string[ ]args)
+        {
+            var agendaTelefonica = new AgendaTelefonica();
+            var agendaTurnos = new AgendaTurnos();
+            var registroAportes = new RegistroAportes();
+
+            while (true)
+            {
+                Console.WriteLine("Seleccione una opción:");
+                Console.WriteLine("1. Agenda Telefónica");
+                Console.WriteLine("2. Agenda de Turnos de Pacientes");
+                Console.WriteLine("3. Registro de Aportes");
+                Console.WriteLine("4. Salir");
+                var opcion = Console.ReadLine();
+
+                switch (opcion)
+                {
+                    case "1":
+                        agendaTelefonica.Gestionar();
+                        break;
+                    case "2":
+                        agendaTurnos.Gestionar();
+                        break;
+                    case "3":
+                        registroAportes.Gestionar();
+                        break;
+                    case "4":
+                        return;
+                    default:
+                        Console.WriteLine("Opción no válida.");
+                        break;
+                }
+            }
+        }
+    }
+
+    // Clase para la Agenda Telefónica
+    class AgendaTelefonica
+    {
+        private Dictionary<string, string> contactos = new Dictionary<string, string>();
+
+        public void Gestionar()
+        {
+            while (true)
+            {
+                Console.WriteLine("Agenda Telefónica:");
+                Console.WriteLine("1. Agregar Contacto");
+                Console.WriteLine("2. Consultar Contacto");
+                Console.WriteLine("3. Listar Contactos");
+                Console.WriteLine("4. Volver");
+                var opcion = Console.ReadLine();
+
+                switch (opcion)
+                {
+                    case "1":
+                        AgregarContacto();
+                        break;
+                    case "2":
+                        ConsultarContacto();
+                        break;
+                    case "3":
+                        ListarContactos();
+                        break;
+                    case "4":
+                        return;
+                    default:
+                        Console.WriteLine("Opción no válida.");
+                        break;
+                }
+            }
+        }
+
+        private void AgregarContacto()
+        {
+            Console.Write("Ingrese el nombre: ");
+            var nombre = Console.ReadLine();
+            Console.Write("Ingrese el teléfono: ");
+            var telefono = Console.ReadLine();
+            contactos[nombre] = telefono;
+            Console.WriteLine("Contacto agregado.");
+        }
+
+        private void ConsultarContacto()
+        {
+            Console.Write("Ingrese el nombre del contacto: ");
+            var nombre = Console.ReadLine();
+            if (contactos.TryGetValue(nombre, out var telefono))
+            {
+                Console.WriteLine($"Teléfono: {telefono}");
+            }
+            else
+            {
+                Console.WriteLine("Contacto no encontrado.");
+            }
+        }
+
+        private void ListarContactos()
+        {
+            Console.WriteLine("Contactos:");
+            foreach (var contacto in contactos)
+            {
+                Console.WriteLine($"{contacto.Key}: {contacto.Value}");
+            }
+        }
+    }
+
+    // Clase para la Agenda de Turnos de Pacientes
+    class AgendaTurnos
+    {
+        private List<Turno> turnos = new List<Turno>();
+
+        public void Gestionar()
+        {
+            while (true)
+            {
+                Console.WriteLine("Agenda de Turnos:");
+                Console.WriteLine("1. Agregar Turno");
+                Console.WriteLine("2. Listar Turnos");
+                Console.WriteLine("3. Volver");
+                var opcion = Console.ReadLine();
+
+                switch (opcion)
+                {
+                    case "1":
+                        AgregarTurno();
+                        break;
+                    case "2":
+                        ListarTurnos();
+                        break;
+                    case "3":
+                        return;
+                    default:
+                        Console.WriteLine("Opción no válida.");
+                        break;
+                }
+            }
+        }
+
+        private void AgregarTurno()
+        {
+            Console.Write("Ingrese el nombre del paciente: ");
+            var paciente = Console.ReadLine();
+            Console.Write("Ingrese la fecha y hora del turno: ");
+            var fechaHora = Console.ReadLine();
+            turnos.Add(new Turno { Paciente = paciente, FechaHora = fechaHora });
+            Console.WriteLine("Turno agregado.");
+        }
+
+        private void ListarTurnos()
+        {
+            Console.WriteLine("Turnos:");
+            foreach (var turno in turnos)
+            {
+                Console.WriteLine($"Paciente: {turno.Paciente}, Fecha y Hora: {turno.FechaHora}");
+            }
+        }
+
+        private class Turno
+        {
+            public string Paciente { get; set; }
+            public string FechaHora { get; set; }
+        }
+    }
+
+    // Clase para el Registro de Aportes
+    class RegistroAportes
+    {
+        private Dictionary<string, decimal> aportes = new Dictionary<string, decimal>();
+
+        public void Gestionar()
+        {
+            while (true)
+            {
+                Console.WriteLine("Registro de Aportes:");
+                Console.WriteLine("1. Registrar Aporte");
+                Console.WriteLine("2. Consultar Aportes");
+                Console.WriteLine("3. Volver");
+                var opcion = Console.ReadLine();
+
+                switch (opcion)
+                {
+                    case "1":
+                        RegistrarAporte();
+                        break;
+                    case "2":
+                        ConsultarAportes();
+                        break;
+                    case "3":
+                        return;
+                    default:
+                        Console.WriteLine("Opción no válida.");
+                        break;
+                }
+            }
+        }
+        private void RegistrarAporte()
+        {
+            Console.Write("Ingrese el nombre del integrante: ");
+            var nombre = Console.ReadLine();
+            Console.Write("Ingrese el monto del aporte: ");
+            var monto = decimal.Parse(Console.ReadLine());
+            aportes[nombre] = monto;
+            Console.WriteLine("Aporte registrado.");
+        }
+
+        private void ConsultarAportes()
+        {
+            Console.WriteLine("Aportes:");
+            foreach (var aporte in aportes)
+            {
+                Console.WriteLine($"{aporte.Key}: {aporte.Value:C}");
+            }
+        }
+    }
+}
