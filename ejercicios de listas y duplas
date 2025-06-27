@@ -1,0 +1,122 @@
+// Ejercicio_1 programa que almacena las asignaturas de un curso (por ejemplo Matemáticas, Física, Química, Historia y Lengua) en una lista y la muestre por pantalla.
+#include <iostream>
+#include <vector>
+#include <string>
+
+int main() {
+    // Crear una lista de asignaturas
+    std::vector<std::string> asignaturas = {
+        "Matemáticas",
+        "Física",
+        "Química",
+        "Historia",
+        "Lengua"
+    };
+
+    // Mostrar las asignaturas por pantalla
+    std::cout << "Asignaturas del curso:" << std::endl;
+    for (const auto& asignatura : asignaturas) {
+        std::cout << "- " << asignatura << std::endl;
+    }
+
+    return 0;
+}
+
+
+
+
+
+//  Ejercicio 3 Programa que almacena las asignaturas de un curso (por ejemplo Matemáticas, Física, Química, Historia y Lengua) en una lista, pregunte al usuario la nota que ha sacado en cada asignatura, y después las muestre por pantalla con el mensaje
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+int main() {
+    // Crear una lista de asignaturas
+    std::vector<std::string> asignaturas = {
+        "Matemáticas",
+        "Física",
+        "Química",
+        "Historia",
+        "Lengua"
+    };
+
+    // Vector para almacenar las notas
+    std::vector<float> notas(asignaturas.size());
+
+    // Preguntar al usuario la nota de cada asignatura
+    for (size_t i = 0; i < asignaturas.size(); ++i) {
+        std::cout << "Introduce la nota de " << asignaturas[i] << ": ";
+        std::cin >> notas[i];
+    }
+
+    // Mostrar las asignaturas y las notas por pantalla
+    std::cout << "\nResultados:\n";
+    for (size_t i = 0; i < asignaturas.size(); ++i) {
+        std::cout << "En " << asignaturas[i] << " has sacado " << notas[i] << std::endl;
+    }
+
+    return 0;
+}
+
+
+
+// Ejercicio 5 Programa que almacene en una lista de los números del 1 al 10 y los muestre por pantalla en orden inverso separados por comas.
+
+#include <iostream>
+#include <vector>
+
+int main() {
+    // Crear una lista de números del 1 al 10
+    std::vector<int> numeros;
+    for (int i = 1; i <= 10; ++i) {
+        numeros.push_back(i);
+    }
+
+    // Mostrar los números en orden inverso, separados por comas
+    std::cout << "Números del 1 al 10 en orden inverso: ";
+    for (int i = numeros.size() - 1; i >= 0; --i) {
+        std::cout << numeros[i];
+        if (i != 0) {
+            std::cout << ", "; // Añadir coma si no es el último número
+        }
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
+
+
+// Ejercicio 4 Programa que pregunte al usuario los números ganadores de la lotería primitiva, los almacene en una lista y los muestre por pantalla ordenados de menor a mayor.
+
+#include <iostream>
+#include <vector>
+#include <algorithm> // Para std::sort
+
+int main() {
+    const int TOTAL_NUMEROS = 6; // Número de números ganadores a ingresar
+    std::vector<int> numerosGanadores;
+
+    // Preguntar al usuario los números ganadores
+    std::cout << "Introduce los " << TOTAL_NUMEROS << " números ganadores de la lotería primitiva:" << std::endl;
+
+    for (int i = 0; i < TOTAL_NUMEROS; ++i) {
+        int numero;
+        std::cout << "Número " << (i + 1) << ": ";
+        std::cin >> numero;
+        numerosGanadores.push_back(numero);
+    }
+
+    // Ordenar los números de menor a mayor
+    std::sort(numerosGanadores.begin(), numerosGanadores.end());
+
+    // Mostrar los números ordenados
+    std::cout << "\nNúmeros ganadores ordenados de menor a mayor:" << std::endl;
+    for (const auto& numero : numerosGanadores) {
+        std::cout << numero << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
