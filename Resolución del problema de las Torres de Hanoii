@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+
+class TorresHanoi
+{
+    static Stack<int> torreA = new Stack<int>();
+    static Stack<int> torreB = new Stack<int>();
+    static Stack<int> torreC = new Stack<int>();
+    static int totalDiscos;
+
+    static void Main()
+    {
+        Console.Write("Ingrese el número de discos: ");
+        totalDiscos = int.Parse(Console.ReadLine());
+
+        // Inicializar torre A (discos ordenados: el más grande abajo)
+        for (int i = totalDiscos; i >= 1; i--)
+        {
+            torreA.Push(i);
+        }
+
+        Console.WriteLine("\nEstado inicial:");
+        MostrarTorres();
+
+        ResolverHanoi(totalDiscos, torreA, torreC, torreB);
+    }
+
+    static void ResolverHanoi(int n, Stack<int> origen, Stack<int> destino, Stack<int> auxiliar)
+    {
+        if (n > 0)
+        {
+            // Mover n-1 discos de origen a auxiliar (usando destino como auxiliar)
+            ResolverHanoi(n - 1, origen, auxiliar, destino);
+
+            // Mover el disco restante (más grande) a destino
+            int disco = origen.Pop();
+            destino.Push(disco);
+            Console.WriteLine($"\nMover disco {disco} de {NombreTorre(origen)} a {NombreTorre(destino)}");
+            MostrarTorres();
+
+            // Mover n-1 discos de auxiliar a destino (usando origen como auxiliar)
+            ResolverHanoi(n - 1, auxiliar, destino, origen);
+        }
+    }
+
+    static string NombreTorre(Stack<int> torre)
+    {
+        if (torre == torreA) return "Torre A";
+        if (torre == torreB) return "Torre B";
+        return "Torre C";
+    }
+
+    static void MostrarTorres()
+    {
+        Console.WriteLine("A: " + string.Join(", ", torreA.Reverse()));
+        Console.WriteLine("B: " + string.Join(", ", torreB.Reverse()));
+        Console.WriteLine("C: " + string.Join(", ", torreC.Reverse()));
+    }
+}
